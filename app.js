@@ -24,6 +24,12 @@ const errorHandlerMiddleware = require('./middleware/error-handler');
 // Authentication middleware
 const authenticateUser = require('./middleware/authentication');
 
+// Swagger
+const swaggerUI = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./swagger.yaml')
+
+
 app.set('trust proxy', 1);
 app.use(
   rateLimiter({
@@ -38,7 +44,9 @@ app.use(xss());
 
 app.get('/', (req, res) => {
   res.send('jobs-api')
-})
+});
+
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // routes
 app.use('/api/v1/auth', authRouter);
