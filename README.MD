@@ -1,4 +1,4 @@
-## Job Posting Website REST API
+## Job Posting REST API
 This project is a REST API built with Node.js, Express, and MongoDB, serving as the backend for a job posting website. It provides functionality for user authentication and CRUD operations for job listings.
 
 ### Features
