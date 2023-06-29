@@ -2,9 +2,9 @@
 This project is a REST API built with Node.js, Express, and MongoDB, serving as the backend for a job posting website. It provides functionality for user authentication and CRUD operations for job listings.
 
 ### Features
-User Authentication: Secure user authentication and authorization system using the User schema.
-Job Listings CRUD: Create, Read, Update, and Delete operations for job listings using the Job schema.
-Security Measures: Implemented security features like helmet, xss-clean, and express-rate-limit to protect against common web vulnerabilities.
+* User Authentication: Secure user authentication and authorization system using the User schema.
+* Job Listings CRUD: Create, Read, Update, and Delete operations for job listings using the Job schema.
+* Security Measures: Implemented security features like helmet, xss-clean, and express-rate-limit to protect against common web vulnerabilities.
 
 ### Installation
 Clone the repository.
@@ -15,10 +15,10 @@ Set up the MongoDB database and configure the connection in the .env file.
 
 Run the application using npm start.
 
-API Documentation
+## API Documentation
 The API documentation is written using Swagger YAML. You can access the documentation by running the application and visiting the /api-docs endpoint.
 
-Usage
+## Usage
 User Authentication:
 
 Register a new user: POST /auth/register
@@ -26,12 +26,12 @@ Login: POST /auth/login
 Logout: POST /auth/logout
 Job Listings:
 
-Create a new job listing: POST /jobs
-Get all job listings: GET /jobs
-Get a specific job listing: GET /jobs/:id
-Update a job listing: PUT /jobs/:id
-Delete a job listing: DELETE /jobs/:id
-Please refer to the API documentation for detailed information on request payloads and responses.
+* Create a new job listing: POST /jobs
+* Get all job listings: GET /jobs
+* Get a specific job listing: GET /jobs/:id
+* Update a job listing: PUT /jobs/:id
+* Delete a job listing: DELETE /jobs/:id
+* Please refer to the API documentation for detailed information on request payloads and responses.
 
 
 #### Setup
