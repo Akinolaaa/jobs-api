@@ -4,7 +4,7 @@ info:
   contact: {}
   version: "1.0"
 servers:
-  - url: https://jobs-api-ak.herokuapp.com/api/v1
+  - url: localhost:3000
     variables: {}
 paths:
   /auth/register:
@@ -226,7 +226,7 @@ components:
   securitySchemes:
     bearer:
       type: http
-      scheme: bearer
+      scheme: Bearer
 security: []
 tags:
   - name: Auth
