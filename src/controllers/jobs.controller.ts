@@ -1,16 +1,15 @@
-const Job = require('../models/Job');
+import Job from '../models/Job';
 import { StatusCodes } from 'http-status-codes';
-const { BadRequestError, NotFoundError } = require('../errors');
+import { BadRequestError, NotFoundError } from '../errors';
 import { Request, Response } from 'express'
 
 export const getAllJobs = async (req: Request, res: Response) => {
   const jobs = await Job.find({ createdBy: req.user.userId }).sort('-createdAt')
-  res.status(StatusCodes.OK).json({ count: jobs.length, jobs })
+  res.status(StatusCodes.OK).json({ count: jobs.length, jobs });
 }
 
 
 export const getJob = async (req: Request, res: Response) => {
-  // Naested destructuring
   const { user:{userId}, params:{id: jobId} } = req;
   const job = await Job.findOne({ userId: jobId , createdBy: userId});
   if(!job) {
@@ -43,7 +42,7 @@ export const updateJob = async (req: Request, res: Response) => {
 }
 export const deleteJob = async (req: Request, res: Response) => {
   const{ user: { userId }, params:{ id: jobId }} = req;
-  const job = await Job.findByIdAndRemove({
+  const job = await Job.findByIdAndDelete({
     userId: jobId,
     createdBy: userId
   })

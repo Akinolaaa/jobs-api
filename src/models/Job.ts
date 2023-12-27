@@ -1,6 +1,18 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
-const JobSchema = new mongoose.Schema({
+export interface IJobInput {
+  company: string;
+  position: string;
+  status: string;
+  createdBy: Schema.Types.ObjectId | string,
+}
+
+export interface IJobDocument extends IJobInput, mongoose.Document {
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const JobSchema = new mongoose.Schema<IJobDocument>({
   company: {
     type: String,
     required: [true, 'Please provide company and name'],
@@ -23,4 +35,6 @@ const JobSchema = new mongoose.Schema({
   }
 }, { timestamps: true })
 
-module.exports = mongoose.model('Job', JobSchema);
+const JobModel = mongoose.model('Job', JobSchema);
+
+export default JobModel;
