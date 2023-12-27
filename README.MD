@@ -1,4 +1,4 @@
-## Job Posting Website REST API
+## Job Posting REST API
 This project is a REST API built with Node.js, Express, and MongoDB, serving as the backend for a job posting website. It provides functionality for user authentication and CRUD operations for job listings.
 
 ### Features
@@ -15,10 +15,10 @@ Set up the MongoDB database and configure the connection in the .env file.
 
 Run the application using npm start.
 
-* API Documentation
+## API Documentation
 The API documentation is written using Swagger YAML. You can access the documentation by running the application and visiting the /api-docs endpoint.
 
-Usage
+## Usage
 User Authentication:
 
 Register a new user: POST /auth/register
@@ -26,12 +26,12 @@ Login: POST /auth/login
 Logout: POST /auth/logout
 Job Listings:
 
-Create a new job listing: POST /jobs
-Get all job listings: GET /jobs
-Get a specific job listing: GET /jobs/:id
-Update a job listing: PUT /jobs/:id
-Delete a job listing: DELETE /jobs/:id
-Please refer to the API documentation for detailed information on request payloads and responses.
+* Create a new job listing: POST /jobs
+* Get all job listings: GET /jobs
+* Get a specific job listing: GET /jobs/:id
+* Update a job listing: PUT /jobs/:id
+* Delete a job listing: DELETE /jobs/:id
+* Please refer to the API documentation for detailed information on request payloads and responses.
 
 
 #### Setup
@@ -45,7 +45,7 @@ npm install && npm start
 1. Import connect.js
 2. Invoke in start()
 3. Setup .env in the root
-4. Add MONGO_URI with correct value
+4. Add MONGO_URI with the correct value
 
 #### Routers
 
@@ -70,7 +70,7 @@ Email Validation Regex
 
 #### Login User
 
-- Validate - email, password - in controller
+- Validate - email, password - in the controller
 - If email or password is missing, throw BadRequestError
 - Find User
 - Compare Passwords
