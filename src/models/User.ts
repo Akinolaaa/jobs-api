@@ -1,8 +1,22 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-const UserSchema = new mongoose.Schema({
+export interface IUserInput {
+  email: string;
+  name: string;
+  password: string;
+}
+
+export interface IUserDocument extends IUserInput, mongoose.Document {
+  createdAt: Date;
+  updatedAt: Date;
+  comparePassword(candidatePassword: string): Promise<Boolean>;
+  createJWT(): void;
+}
+
+
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Please provide name'],
@@ -25,21 +39,23 @@ const UserSchema = new mongoose.Schema({
   },
 })
 
-UserSchema.pre('save', async function() {
+userSchema.pre('save', async function() {
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 })
 
 // Creating a method you can call to do something with user data
-UserSchema.methods.createJWT = function () {
-  return jwt.sign({userId: this._id, name:this.name}, process.env.JWT_SECRET,{
+userSchema.methods.createJWT = function () {
+  return jwt.sign({userId: this._id, name:this.name}, process.env.JWT_SECRET as string,{
     expiresIn: process.env.JWT_LIFETIME
   })
 }
 
-UserSchema.methods.comparePassword = async function(candidatePassword) {
+userSchema.methods.comparePassword = async function(candidatePassword: string) {
   const isMatch = await bcrypt.compare(candidatePassword, this.password);
   return isMatch;
 }
 
-module.exports = mongoose.model('User', UserSchema);
+const UserModel = mongoose.model<IUserDocument>("User", userSchema);
+
+export default UserModel;

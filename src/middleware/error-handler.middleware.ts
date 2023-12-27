@@ -1,7 +1,9 @@
+import { NextFunction, Request, Response } from "express";
+
 //const { CustomAPIError } = require('../errors');
 const { StatusCodes } = require('http-status-codes');
 
-const errorHandlerMiddleware = (err, req, res, next) => {
+const errorHandlerMiddleware = (err: any, req: Request, res: Response, next: NextFunction) => {
   let customError = {
     // set default
     statusCode: err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
@@ -14,7 +16,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
 
   // mongo error- email and/or password not provided 
   if(err.name === 'ValidationError'){
-    customError.msg = Object.values(err.errors).map( item => item.message).join(', ');
+    customError.msg = Object.values(err.errors).map((item: any) => item.message).join(', ');
     customError.statusCode = 400;
   }
   // mongo error - creating duplicate unique property(e.g. email)
@@ -32,4 +34,4 @@ const errorHandlerMiddleware = (err, req, res, next) => {
 }
 // These if statements were gottten by looking at the full error message of each error type;s
 
-module.exports = errorHandlerMiddleware
+export default errorHandlerMiddleware;
